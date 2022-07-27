@@ -12,15 +12,19 @@ const TIMER_INTERVAL = 1000; // interval to change remaining time amount, millis
 
 function App() {
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
+  const [isAudioControlShown, setIsAudioControlShown] = useState<boolean>(true);
   const [timerRemaining, {
     start: startTimer,
     pause: pauseTimer,
-    resume: resumeTimer,
   }] = useCountDown(TIMER_INITIAL_TIME, TIMER_INTERVAL);
 
   const toggleIsHelpOpen = useCallback(() => {
     setIsHelpOpen(!isHelpOpen)
   }, [isHelpOpen, setIsHelpOpen]);
+
+  const toggleIsAudioControlShown = useCallback(() => {
+    setIsAudioControlShown(!isAudioControlShown)
+  }, [isAudioControlShown, setIsAudioControlShown]);
 
   const resetTimer = useCallback((timeMs?: number) => {
     const actualTimeMs = timeMs ?? TIMER_INITIAL_TIME;
@@ -32,6 +36,9 @@ function App() {
     switch (keyName) {
       case "shift+h":
         toggleIsHelpOpen();
+        break;
+      case "shift+a":
+        toggleIsAudioControlShown();
         break;
       case "shift+s":
         startTimer(timerRemaining);
@@ -49,7 +56,7 @@ function App() {
         resetTimer(timerRemaining + (60 * 1000));
         break;
     }
-  }, [timerRemaining, toggleIsHelpOpen, pauseTimer, resumeTimer, resetTimer]);
+  }, [timerRemaining, toggleIsHelpOpen, startTimer, pauseTimer, resetTimer]);
 
   useEffect(() => {
     resetTimer();
@@ -57,12 +64,15 @@ function App() {
 
   return (
     <Hotkeys 
-      keyName="shift+h,shift+s,shift+p,shift+r,shift+q,shift+w"
+      keyName="shift+h,shift+a,shift+s,shift+p,shift+r,shift+q,shift+w"
       onKeyDown={handleKeyDown}
     >
       <div>
         <BackgroundVideo src="/media/deep-water-loop.mp4" />
-        <BackgroundAudio src="/media/submarine-sonar-sounds-30mins.mp3" />
+        <BackgroundAudio
+          src="/media/submarine-sonar-sounds-30mins.mp3"
+          isControlShown={isAudioControlShown}
+        />
         <Countdown timeRemainingMs={timerRemaining} />
         { isHelpOpen && <Help /> }
       </div>

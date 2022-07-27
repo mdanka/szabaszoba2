@@ -6,6 +6,10 @@ export function Help() {
             You can use the following shortcuts:
             <ul>
                 <li><strong>Shift + h</strong> - open/close this help menu</li>
+                <li><strong>Shift + a</strong> - start/stop audio</li>
+            </ul>
+
+            <ul>
                 <li><strong>Shift + s</strong> - start timer</li>
                 <li><strong>Shift + p</strong> - pause timer</li>
                 <li><strong>Shift + r</strong> - reset timer</li>
