@@ -78,7 +78,7 @@ function App() {
       <div>
         <BackgroundVideo src="/media/deep-water-loop.mp4" />
         <BackgroundAudio
-          src="/media/submarine-sonar-sounds-30mins.mp3"
+          src="/media/submarine-sonar-sounds-15mins.mp3"
           isControlShown={isAudioControlShown}
         />
         <Countdown timeRemainingMs={timerRemaining} />
