@@ -6,6 +6,7 @@ import { BackgroundAudio } from './components/backgroundAudio';
 import { Countdown } from './components/countdown';
 import { Help } from './components/help';
 import useCountDown from 'react-countdown-hook';
+import { InputArea } from './components/inputArea';
 
 const TIMER_INITIAL_TIME = 15 * 60 * 1000; // initial time in milliseconds
 const TIMER_INTERVAL = 1000; // interval to change remaining time amount, milliseconds
@@ -56,7 +57,14 @@ function App() {
         resetTimer(timerRemaining + (60 * 1000));
         break;
     }
-  }, [timerRemaining, toggleIsHelpOpen, startTimer, pauseTimer, resetTimer]);
+  }, [
+    timerRemaining,
+    toggleIsHelpOpen,
+    toggleIsAudioControlShown,
+    startTimer,
+    pauseTimer,
+    resetTimer
+  ]);
 
   useEffect(() => {
     resetTimer();
@@ -74,6 +82,7 @@ function App() {
           isControlShown={isAudioControlShown}
         />
         <Countdown timeRemainingMs={timerRemaining} />
+        <InputArea />
         { isHelpOpen && <Help /> }
       </div>
     </Hotkeys>
