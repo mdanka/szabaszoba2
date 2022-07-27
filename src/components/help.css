@@ -1,0 +1,8 @@
+.help-panel {
+    color: white;
+    background-color: #333333aa;
+    padding: 3vw;
+    margin: 3vw;
+    font-size: 2vw;
+    z-index: 100;
+}
