@@ -6,14 +6,13 @@
 .countdown {
     font-family: 'digitalFont';
     color: red;
-    text-shadow: 0 0 50px red;
+    text-shadow: 0 0 4vw red;
 
     position: fixed;
     top: 30%;
 
-
     width: 100%;
     height: 100%;
     text-align: center;
-    font-size: 200px;
+    font-size: 20vw;
 }

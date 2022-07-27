@@ -1,28 +1,69 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import Hotkeys from 'react-hot-keys';
 import { BackgroundVideo } from './components/backgroundVideo';
 import { BackgroundAudio } from './components/backgroundAudio';
 import { Countdown } from './components/countdown';
 import { Help } from './components/help';
+import useCountDown from 'react-countdown-hook';
+
+const TIMER_INITIAL_TIME = 15 * 60 * 1000; // initial time in milliseconds
+const TIMER_INTERVAL = 1000; // interval to change remaining time amount, milliseconds
 
 function App() {
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
+  const [timerRemaining, {
+    start: startTimer,
+    pause: pauseTimer,
+    resume: resumeTimer,
+  }] = useCountDown(TIMER_INITIAL_TIME, TIMER_INTERVAL);
 
-  const toggleIsHelpOpen = useCallback(
-    () => setIsHelpOpen(!isHelpOpen),
-    [isHelpOpen, setIsHelpOpen],
-  );
+  const toggleIsHelpOpen = useCallback(() => {
+    setIsHelpOpen(!isHelpOpen)
+  }, [isHelpOpen, setIsHelpOpen]);
+
+  const resetTimer = useCallback((timeMs?: number) => {
+    const actualTimeMs = timeMs ?? TIMER_INITIAL_TIME;
+    startTimer(actualTimeMs);
+    pauseTimer();
+  }, [startTimer, pauseTimer])
+
+  const handleKeyDown = useCallback((keyName: string) => {
+    switch (keyName) {
+      case "shift+h":
+        toggleIsHelpOpen();
+        break;
+      case "shift+s":
+        startTimer(timerRemaining);
+        break;
+      case "shift+p":
+        pauseTimer();
+        break;
+      case "shift+r":
+        resetTimer(TIMER_INITIAL_TIME);
+        break;
+      case "shift+q":
+        resetTimer(timerRemaining - (60 * 1000));
+        break;
+      case "shift+w":
+        resetTimer(timerRemaining + (60 * 1000));
+        break;
+    }
+  }, [timerRemaining, toggleIsHelpOpen, pauseTimer, resumeTimer, resetTimer]);
+
+  useEffect(() => {
+    resetTimer();
+  }, [resetTimer])
 
   return (
     <Hotkeys 
-      keyName="shift+h"
-      onKeyDown={toggleIsHelpOpen}
+      keyName="shift+h,shift+s,shift+p,shift+r,shift+q,shift+w"
+      onKeyDown={handleKeyDown}
     >
       <div>
         <BackgroundVideo src="/media/deep-water-loop.mp4" />
         <BackgroundAudio src="/media/submarine-sonar-sounds-30mins.mp3" />
-        {/* <Countdown /> */}
+        <Countdown timeRemainingMs={timerRemaining} />
         { isHelpOpen && <Help /> }
       </div>
     </Hotkeys>

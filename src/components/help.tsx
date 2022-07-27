@@ -6,9 +6,11 @@ export function Help() {
             You can use the following shortcuts:
             <ul>
                 <li><strong>Shift + h</strong> - open/close this help menu</li>
-                <li><strong>Shift + t</strong> - start timer</li>
-                <li><strong>Shift + s</strong> - stop timer</li>
+                <li><strong>Shift + s</strong> - start timer</li>
+                <li><strong>Shift + p</strong> - pause timer</li>
                 <li><strong>Shift + r</strong> - reset timer</li>
+                <li><strong>Shift + q</strong> - -1 minute</li>
+                <li><strong>Shift + w</strong> - +1 minute</li>
             </ul>
         </div>
     );
