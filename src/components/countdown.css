@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'digitalFont';
+    src: url('../../public/fonts/ds_digital/DS-DIGII.TTF');
+}
+
+.countdown {
+    font-family: 'digitalFont';
+    color: red;
+    text-shadow: 0 0 50px red;
+
+    position: fixed;
+    top: 30%;
+
+
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 200px;
+}
