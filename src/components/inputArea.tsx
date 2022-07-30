@@ -28,7 +28,7 @@ export function InputArea() {
             <button className="input-area-button" onClick={onSubmit}>💣</button>
             <div className="input-area-info">
                 {isCorrect === true && (
-                    <span>A bázis sikeresen felrobbantva! 💥<br />A következő kód: 1234</span>
+                    <span>A bázis sikeresen felrobbantva! 💥<br />A következő kód: 863</span>
                 )}
                 {isCorrect === false && (
                     <span>Rossz bázist sikerült felrobbantani 😬</span>
