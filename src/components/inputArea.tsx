@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import "./inputArea.css";
 
-const SOLUTION = "Teszt"
+const SOLUTION = "Sukko"
 
 export function InputArea() {
     const [value, setValue] = useState<string>("");
