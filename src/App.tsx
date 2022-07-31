@@ -8,7 +8,7 @@ import { Help } from './components/help';
 import useCountDown from 'react-countdown-hook';
 import { InputArea } from './components/inputArea';
 
-const TIMER_INITIAL_TIME = 15 * 60 * 1000; // initial time in milliseconds
+const TIMER_INITIAL_TIME = 25 * 60 * 1000; // initial time in milliseconds
 const TIMER_INTERVAL = 1000; // interval to change remaining time amount, milliseconds
 
 function App() {
