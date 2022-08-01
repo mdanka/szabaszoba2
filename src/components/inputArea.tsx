@@ -1,9 +1,30 @@
 import { useCallback, useState } from "react"
 import "./inputArea.css";
 
-const SOLUTION = "Surgut"
+const SOLUTION = "Darium"
 
-export function InputArea() {
+const STRINGS = {
+    english: {
+        buttonText: "Enter",
+        inputLabel: "Name of the secret material",
+        solutionIncorrect: "That was incorrect 😬",
+        solutionCorrect: (
+            <span>Correct! ✅<br />Material number <strong>863</strong> is ready.</span>
+        ),
+    },
+    hungarian: {
+        buttonText: "Beküld",
+        inputLabel: "A titkos anyag neve",
+        solutionIncorrect: "Helytelen 😬",
+        solutionCorrect: (
+            <span>Helyes! ✅<br />A <strong>863</strong>-as számú anyag készenlétben.</span>
+        ),
+    },
+} as const;
+
+export function InputArea(props: { language: "english" | "hungarian" }) {
+    const { language } = props;
+
     const [value, setValue] = useState<string>("");
     const [isCorrect, setIsCorrect] = useState<boolean | undefined>(undefined);
 
@@ -21,17 +42,15 @@ export function InputArea() {
             <input
                 className="input-area-field"
                 type="text"
-                placeholder="A titkos bázis neve"
+                placeholder={STRINGS[language].inputLabel}
                 value={value}
                 onChange={onChange}
             />
-            <button className="input-area-button" onClick={onSubmit}>💣</button>
+            <button className="input-area-button" onClick={onSubmit}>{STRINGS[language].buttonText}</button>
             <div className="input-area-info">
-                {isCorrect === true && (
-                    <span>A bázis sikeresen felrobbantva! 💥<br />A <strong>863</strong>-as küldetés teljesítve!</span>
-                )}
+                {isCorrect === true && STRINGS[language].solutionCorrect}
                 {isCorrect === false && (
-                    <span>Rossz bázist sikerült felrobbantani 😬</span>
+                    <span>{STRINGS[language].solutionIncorrect}</span>
                 )}
             </div>
         </div>

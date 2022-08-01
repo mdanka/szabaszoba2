@@ -18,6 +18,7 @@ function App() {
     start: startTimer,
     pause: pauseTimer,
   }] = useCountDown(TIMER_INITIAL_TIME, TIMER_INTERVAL);
+  const [language, setLanguage] = useState<"hungarian" | "english">("hungarian");
 
   const toggleIsHelpOpen = useCallback(() => {
     setIsHelpOpen(!isHelpOpen)
@@ -26,6 +27,10 @@ function App() {
   const toggleIsAudioControlShown = useCallback(() => {
     setIsAudioControlShown(!isAudioControlShown)
   }, [isAudioControlShown, setIsAudioControlShown]);
+
+  const toggleLanguage = useCallback(() => {
+    setLanguage(language === "hungarian" ? "english" : "hungarian");
+  }, [language, setLanguage]);
 
   const resetTimer = useCallback((timeMs?: number) => {
     const actualTimeMs = timeMs ?? TIMER_INITIAL_TIME;
@@ -40,6 +45,9 @@ function App() {
         break;
       case "shift+a":
         toggleIsAudioControlShown();
+        break;
+      case "shift+l":
+        toggleLanguage();
         break;
       case "shift+s":
         startTimer(timerRemaining);
@@ -61,6 +69,7 @@ function App() {
     timerRemaining,
     toggleIsHelpOpen,
     toggleIsAudioControlShown,
+    toggleLanguage,
     startTimer,
     pauseTimer,
     resetTimer
@@ -72,7 +81,7 @@ function App() {
 
   return (
     <Hotkeys 
-      keyName="shift+h,shift+a,shift+s,shift+p,shift+r,shift+q,shift+w"
+      keyName="shift+h,shift+a,shift+l,shift+s,shift+p,shift+r,shift+q,shift+w"
       onKeyDown={handleKeyDown}
     >
       <div>
@@ -82,8 +91,8 @@ function App() {
           isControlShown={isAudioControlShown}
         />
         <Countdown timeRemainingMs={timerRemaining} />
-        <InputArea />
-        { isHelpOpen && <Help /> }
+        <InputArea language={language} />
+        { isHelpOpen && <Help language={language} /> }
       </div>
     </Hotkeys>
   );
