@@ -2,7 +2,6 @@
     color: #dddddd;
     font-size: 3vw;
     font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
 
     position: fixed;
     top: 60%;
@@ -10,6 +9,8 @@
     width: 100%;
     height: 100%;
     text-align: center;
+
+    z-index: -1;
 }
 
 .input-area-field {
@@ -20,7 +21,6 @@
     border: none;
     color: #dddddd;
     font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
     background-color: #111111dd;
 
     padding-left: 2vw;
@@ -38,7 +38,9 @@
     font-size: 3vw;
     background-color: #aaaaaa;
     border: none;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .input-area-info {
+    font-weight: normal;
 }
