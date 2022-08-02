@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import "./inputArea.css";
 
-const SOLUTION = "Darium"
+const SOLUTION = "Durium"
 
 const STRINGS = {
     english: {
